@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,4 +57,11 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
+
+    // coroutines
+    implementation(libs.kotlinx.coroutines.android)
+    // ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    ksp(libs.androidx.lifecycle.compiler)
+    implementation(libs.kodein.di.jvm)
 }
