@@ -1,2 +1,5 @@
 # ShoppingListMVVM
-Shoppong List App using MVVM, Room, Coroutines, Kodein
+1. MVVM architectural design patterns
+2. Room Database
+3. Kotlin coroutines
+4. Dependency Injection - Kodein
