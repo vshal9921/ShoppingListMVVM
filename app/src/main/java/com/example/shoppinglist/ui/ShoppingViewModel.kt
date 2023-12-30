@@ -18,6 +18,6 @@ class ShoppingViewModel(private val shoppingRepo: ShoppingRepo) : ViewModel() {
         shoppingRepo.delete(item)
     }
 
-    suspend fun getAllShoppingItems() = shoppingRepo.getAllShoppingItems()
+     fun getAllShoppingItems() = shoppingRepo.getAllShoppingItems()
 
 }

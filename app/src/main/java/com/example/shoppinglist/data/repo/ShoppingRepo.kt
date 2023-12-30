@@ -9,6 +9,6 @@ class ShoppingRepo (private val db : ShoppingDatabase){
 
     suspend fun delete(item: ShoppingItem) = db.getShoppingDao().delete(item)
 
-    suspend fun getAllShoppingItems() = db.getShoppingDao().getAllItems()
+     fun getAllShoppingItems() = db.getShoppingDao().getAllItems()
 
 }

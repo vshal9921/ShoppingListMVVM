@@ -1,10 +1,8 @@
 package com.example.shoppinglist.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shoppinglist.R
 import com.example.shoppinglist.data.db.ShoppingItem
 import com.example.shoppinglist.databinding.ItemShoppingBinding
 
@@ -39,6 +37,9 @@ class ShoppingAdapter(var items: List<ShoppingItem>, private val viewModel: Shop
             binding.minus.setOnClickListener {
                 if(currShoppingItem.count > 0){
                     currShoppingItem.count--
+                    viewModel.insert(currShoppingItem)
+                }
+                else{
                     viewModel.delete(currShoppingItem)
                 }
             }
