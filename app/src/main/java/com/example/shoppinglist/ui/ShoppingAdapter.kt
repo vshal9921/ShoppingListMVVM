@@ -6,39 +6,41 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
 import com.example.shoppinglist.data.db.ShoppingItem
-import kotlinx.android.synthetic.main.item_shopping.view.delete
-import kotlinx.android.synthetic.main.item_shopping.view.itemName
-import kotlinx.android.synthetic.main.item_shopping.view.itemQuantity
-import kotlinx.android.synthetic.main.item_shopping.view.minus
-import kotlinx.android.synthetic.main.item_shopping.view.plus
+import com.example.shoppinglist.databinding.ItemShoppingBinding
 
 class ShoppingAdapter(var items: List<ShoppingItem>, private val viewModel: ShoppingViewModel
 ) : RecyclerView.Adapter<ShoppingAdapter.ShoppingViewHolder>() {
 
+    private lateinit var binding : ItemShoppingBinding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingAdapter.ShoppingViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_shopping, parent, false)
-        return ShoppingViewHolder(view)
+
+        binding = ItemShoppingBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+        return ShoppingViewHolder(binding)
     }
     override fun onBindViewHolder(holder: ShoppingAdapter.ShoppingViewHolder, position: Int) {
 
-        val currShoppingItem = items.get(position)
+        with(holder){
 
-        holder.itemView.itemName.text = currShoppingItem.name
-        holder.itemView.itemQuantity.text = "${currShoppingItem.count}"
+            val currShoppingItem = items[position]
 
-        holder.itemView.delete.setOnClickListener {
-            viewModel.delete(currShoppingItem)
-        }
+            binding.itemName.text = currShoppingItem.name
+            binding.itemQuantity.text = "${currShoppingItem.count}"
 
-        holder.itemView.plus.setOnClickListener {
-            currShoppingItem.count++
-            viewModel.insert(currShoppingItem)
-        }
-
-        holder.itemView.minus.setOnClickListener {
-            if(currShoppingItem.count > 0){
-                currShoppingItem.count--
+            binding.delete.setOnClickListener {
                 viewModel.delete(currShoppingItem)
+            }
+
+            binding.plus.setOnClickListener {
+                currShoppingItem.count++
+                viewModel.insert(currShoppingItem)
+            }
+
+            binding.minus.setOnClickListener {
+                if(currShoppingItem.count > 0){
+                    currShoppingItem.count--
+                    viewModel.delete(currShoppingItem)
+                }
             }
         }
     }
@@ -47,5 +49,5 @@ class ShoppingAdapter(var items: List<ShoppingItem>, private val viewModel: Shop
         return items.size
     }
 
-    class ShoppingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ShoppingViewHolder(binding: ItemShoppingBinding) : RecyclerView.ViewHolder(binding.root)
 }
